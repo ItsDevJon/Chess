@@ -1,11 +1,24 @@
 package com.chess;
+
 import java.awt.Graphics2D;
 import java.awt.Color;
+
+import java.util.List;
+
+import com.chess.pieces.*;
+
 public class Board {
+
     public final static int totalRow = 8;
     public final static int totalCol = 8;
     public final static int totalPiece = totalCol * totalRow;
+
     GamePanel gp;
+
+    public static final int width = 8;
+
+    public List<Piece> boardPieces;
+
     //TODO: GET list<Piece> chessBoard and initialize
     public Board(GamePanel gp) {
         this.gp = gp;
