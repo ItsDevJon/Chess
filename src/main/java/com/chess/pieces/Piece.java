@@ -50,7 +50,7 @@ public abstract class Piece {
 
     private BufferedImage getImg(TYPE type, COLOR color) throws FileNotFoundException, IOException {
         BufferedImage img;
-        System.out.println(type);
+        //System.out.println(type);
         switch (type) {
             case KNIGHT:
                 if (color == COLOR.BLACK) {
