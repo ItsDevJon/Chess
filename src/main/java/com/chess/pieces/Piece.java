@@ -1,4 +1,4 @@
-package com.chess;
+package com.chess.pieces;
 
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
@@ -8,6 +8,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import javax.imageio.ImageIO;
+
+import com.chess.Board;
 
 public abstract class Piece {
 
@@ -44,11 +46,11 @@ public abstract class Piece {
         }
     }
 
-    public abstract boolean move();
+    public abstract boolean move(Board board, int xTo, int yTo);
 
     private BufferedImage getImg(TYPE type, COLOR color) throws FileNotFoundException, IOException {
         BufferedImage img;
-        System.out.println(type);
+        //System.out.println(type);
         switch (type) {
             case KNIGHT:
                 if (color == COLOR.BLACK) {

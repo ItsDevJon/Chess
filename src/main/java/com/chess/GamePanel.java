@@ -11,10 +11,10 @@ import javax.swing.JPanel;
 
 public class GamePanel extends JPanel implements Runnable {
 	
-	final int originalSize = 16;
-	final int scale = 6;
+	static final int originalSize = 16;
+	static final int scale = 6;
 	
-	public final int tileSize = scale * originalSize;
+	public static final int tileSize = scale * originalSize;
 	public final int maxCol = 8;
 	public final int maxRow = 8;
 	final int screenWith = tileSize * maxCol;
@@ -22,10 +22,13 @@ public class GamePanel extends JPanel implements Runnable {
 
 	Thread gameThread;
 
+	public MouseHandler mHandler;
 	public Chess chess;
 
 	public GamePanel() {
-		chess = new Chess(this);
+		mHandler = new MouseHandler();
+		this.addMouseListener(mHandler);
+		chess = new Chess(this, mHandler);
 		this.setPreferredSize(new Dimension(screenWith, screenHeight));
 		this.setBackground(Color.black);
 		this.setDoubleBuffered(true);
