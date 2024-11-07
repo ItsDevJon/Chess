@@ -30,7 +30,19 @@ public abstract class Piece {
     }
 
     public enum TYPE {
-        KNIGHT, PAWN, BISHOP, ROOK, QUEEN, KING
+
+        KNIGHT("knight"), 
+        PAWN("pawn"), 
+        BISHOP("bishop"), 
+        ROOK("rook"), 
+        QUEEN("queen"), 
+        KING("king");
+
+        private final String name;
+
+        TYPE(String name) {
+            this.name = name.toLowerCase();
+        }
     }
 
     public enum CORDS {
@@ -57,68 +69,11 @@ public abstract class Piece {
     public abstract boolean move(Board board, int xTo, int yTo);
 
     private BufferedImage getImg(TYPE type, COLOR color) throws FileNotFoundException, IOException {
-        BufferedImage img;
-        //System.out.println(type);
-        switch (type) {
-            case KNIGHT:
-                if (color == COLOR.BLACK) {
-                    img = ImageIO.read(new FileInputStream(BASE.resolve("knight_" + black).toString()));
 
-                } else if (color == COLOR.WHITE) {
-                    img = ImageIO.read(new FileInputStream(BASE.resolve("knight_" + white).toString()));
-                } else {
-                    img = null;
-                }
-                break;
-            case PAWN:
-                if (color == COLOR.BLACK) {
-                    img = ImageIO.read(new FileInputStream(BASE.resolve("pawn_" + black).toString()));
-                } else if (color == COLOR.WHITE) {
-                    img = ImageIO.read(new FileInputStream(BASE.resolve("pawn_" + white).toString()));
-                } else {
-                    img = null;
-                }
-                break;
-            case BISHOP:
-                if (color == COLOR.BLACK) {
-                    img = ImageIO.read(new FileInputStream(BASE.resolve("bishop_" + black).toString()));
-                } else if (color == COLOR.WHITE) {
-                    img = ImageIO.read(new FileInputStream(BASE.resolve("bishop_" + white).toString()));
-                } else {
-                    img = null;
-                }
-                break;
-            case ROOK:
-                if (color == COLOR.BLACK) {
-                    img = ImageIO.read(new FileInputStream(BASE.resolve("rook_" + black).toString()));
-                } else if (color == COLOR.WHITE) {
-                    img = ImageIO.read(new FileInputStream(BASE.resolve("rook_" + white).toString()));
-                } else {
-                    img = null;
-                }
-                break;
-            case QUEEN:
-                if (color == COLOR.BLACK) {
-                    img = ImageIO.read(new FileInputStream(BASE.resolve("queen_" + black).toString()));
-                } else if (color == COLOR.WHITE) {
-                    img = ImageIO.read(new FileInputStream(BASE.resolve("queen_" + white).toString()));
-                } else {
-                    img = null;
-                }
-                break;
-            case KING:
-                if (color == COLOR.BLACK) {
-                    img = ImageIO.read(new FileInputStream(BASE.resolve("king_" + black).toString()));
-                } else if (color == COLOR.WHITE) {
-                    img = ImageIO.read(new FileInputStream(BASE.resolve("king_" + white).toString()));
-                } else {
-                    img = null;
-                }
-                break;
-            default:
-                img = null;
-                break;
-        }
+        BufferedImage img;
+        
+        img = ImageIO.read(new FileInputStream(BASE.resolve(type + "_" + color + ".png").toString().toLowerCase()));
+
         return img;
     }
 
