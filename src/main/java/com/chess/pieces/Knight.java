@@ -4,7 +4,6 @@ import com.chess.Board;
 import com.chess.GamePanel;
 
 public class Knight extends Piece {
-    
 
     public Knight(COLOR color, int y, int x) {
         super(TYPE.KNIGHT, color, y, x);
@@ -13,46 +12,36 @@ public class Knight extends Piece {
 
     @Override
     public boolean move(Board board, int xTo, int yTo) {
-        // TODO Auto-generated method stub
         boolean returnValue = false;
 
         switch (getElectedCords(xTo, yTo)) {
             case SW:
-                returnValue = verifyMove(board, xTo, yTo, 2, 1, 1, 2);
+                returnValue = verifyAndMovePiece(board, xTo, yTo, -2, 1, false, true);
+                if (returnValue)
+                    return true;
+                returnValue = verifyAndMovePiece(board, xTo, yTo, -1, 2, false, true);
                 break;
-            case S:
-                returnValue = verifyMove(board, xTo, yTo, 2, -1, 1, -2);
+            case NE:
+                returnValue = verifyAndMovePiece(board, xTo, yTo, 2, -1, false, true);
+                if (returnValue)
+                    return true;
+                returnValue = verifyAndMovePiece(board, xTo, yTo, 1, -2, false, true);
                 break;
             case SE:
-                returnValue = verifyMove(board, xTo, yTo, -2, 1, -1, 2);
+                returnValue = verifyAndMovePiece(board, xTo, yTo, 2, 1, false, true);
+                if (returnValue)
+                    return true;
+                returnValue = verifyAndMovePiece(board, xTo, yTo, 1, 2, false, true);
                 break;
-            case D:
-                returnValue = verifyMove(board, xTo, yTo, -2, -1, -1, -2);
+            case NW:
+                returnValue = verifyAndMovePiece(board, xTo, yTo, -2, -1, false, true);
+                if (returnValue)
+                    return true;
+                returnValue = verifyAndMovePiece(board, xTo, yTo, -1, -2, false, true);
                 break;
             default:
-                break;                
+                return returnValue;
         }
         return returnValue;
-
     }
-
-    private boolean verifyMove(Board board, int xTo, int yTo, int col1, int row1, int col2, int row2) {
-        
-        int knightCol = (this.y / GamePanel.tileSize);
-        int knightRow = (this.x / GamePanel.tileSize);
-        int knightIndex = (knightCol * Board.width + knightRow);
-        int wantedMove = (yTo * Board.width + xTo);
-        int knightPossibleMove1;
-        int knightPossibleMove2;
-        knightPossibleMove1 = (knightCol + col1) * Board.width + (knightRow + row1);
-        knightPossibleMove2 = (knightCol + col2) * Board.width + (knightRow + row2);
-        if (knightPossibleMove1 == wantedMove) {
-            return canMove(board, knightIndex, knightPossibleMove1);
-        } else if (knightPossibleMove2 == wantedMove) {
-            return canMove(board, knightIndex, knightPossibleMove2);
-        }
-        
-        return false;
-    }
-    
 }
