@@ -10,9 +10,21 @@ public class Queen extends Piece{
     }
 
     @Override
-    public boolean move(Board board, int x, int y){
+    public boolean move(Board board, int xTo, int yTo){
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'move'");
+        boolean returnValue = false;
+        switch (getElectedCords(xTo, yTo)) {
+            case SW, SE, NE, NW:
+            returnValue=moveDiagonal(board, xTo, yTo);
+                break;
+            case S, E, N, W:
+            returnValue=moveCross(board, xTo, yTo);
+                break;
+            default:
+                return returnValue;
+        }
+        return returnValue;
+    }
     }
 
 
