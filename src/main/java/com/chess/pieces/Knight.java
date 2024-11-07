@@ -17,13 +17,13 @@ public class Knight extends Piece {
         boolean returnValue = false;
 
         switch (getElectedCords(xTo, yTo)) {
-            case A:
+            case SW:
                 returnValue = verifyMove(board, xTo, yTo, 2, 1, 1, 2);
                 break;
-            case B:
+            case S:
                 returnValue = verifyMove(board, xTo, yTo, 2, -1, 1, -2);
                 break;
-            case C:
+            case SE:
                 returnValue = verifyMove(board, xTo, yTo, -2, 1, -1, 2);
                 break;
             case D:
