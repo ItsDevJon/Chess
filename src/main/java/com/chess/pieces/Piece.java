@@ -23,7 +23,6 @@ public abstract class Piece {
 
     public BufferedImage img;
     public int y, x;
-    public int col, row;
 
     public enum COLOR {
         BLACK, WHITE
@@ -46,7 +45,7 @@ public abstract class Piece {
     }
 
     public enum CORDS {
-        A, B, C, D
+        SW, S, SE, E, NE, N, NW, W, SELF
     }
 
     public TYPE type;
@@ -65,6 +64,152 @@ public abstract class Piece {
             e.printStackTrace();
         }
     }
+    
+    public boolean canMove(Board board, int pieceIndex, int possibleMove) {
+        
+        Optional<Piece> tileToMove = Optional.ofNullable(board.boardPieces.get(possibleMove));
+        if ((tileToMove.isPresent() && tileToMove.get().color != this.color) || tileToMove.isEmpty()) {
+            movePiece(board, pieceIndex, possibleMove);
+            return true;
+        }   else {
+            return false;
+        }
+    }
+    
+    public boolean moveDiagonal(Board board, int xTo, int yTo) {
+        int xOrigin = (this.x / GamePanel.tileSize);
+        int yOrigin = (this.y / GamePanel.tileSize);
+        int xDirection;
+        int yDirection;
+        int goTo;
+        if(xOrigin<xTo){
+            xDirection = 1;
+            goTo = xTo-xOrigin;
+        }else if(xOrigin>xTo){
+            xDirection = -1;
+            goTo = xOrigin-xTo;
+        }else return false;
+        if(yOrigin<yTo){
+            yDirection = 1;
+        }else if(yOrigin>yTo){
+            yDirection = -1;
+        }else return false;
+        for (int i = 1; i < goTo; i++) {
+            int index2 = ((yOrigin + (i*yDirection)) * Board.width + (xOrigin + (i*xDirection)));
+            boolean isTileEmpty = (verifyMovePiece(board, index2, false, false));
+            if (!isTileEmpty) {
+                return false;
+            }
+        }
+        return verifyAndMovePiece(board, xTo, yTo, goTo*xDirection, goTo*yDirection, false, true);
+    }
+
+    public boolean moveCross(Board board, int xTo, int yTo) {
+        int xOrigin = (this.x / GamePanel.tileSize);
+        int yOrigin = (this.y / GamePanel.tileSize);
+        int xDirection=0;
+        int yDirection=0;
+        int goTo=0;
+        if(xOrigin==xTo && yOrigin!=yTo){
+            xDirection = 0;
+            yDirection = yOrigin>yTo?-1:1;
+            goTo = yTo-yOrigin;
+        }
+        else if(xOrigin!=xTo &&yOrigin==yTo){
+            xDirection = xOrigin>xTo?-1:1;
+            yDirection = 0;
+            goTo = xTo-xOrigin;
+        }else return false;
+        goTo = Math.abs(goTo);
+        for (int i = 1; i < goTo; i++) {
+            int index2 = ((yOrigin + (i*yDirection)) * Board.width + (xOrigin + (i*xDirection)));
+            boolean isTileEmpty = (verifyMovePiece(board, index2, false, false));
+            if (!isTileEmpty) {
+                return false;
+            }
+        }
+        return verifyAndMovePiece(board, xTo, yTo, goTo*xDirection, goTo*yDirection, false, true);
+    }
+
+    public boolean verifyAndMovePiece(Board board, int xTo, int yTo, int col, int row, boolean ocupied,
+            boolean jump) {
+        int pieceCol = (this.y / GamePanel.tileSize);
+        int pieceRow = (this.x / GamePanel.tileSize);
+        int pieceIndex = (pieceCol * Board.width + pieceRow);
+        int wantedMove = (yTo * Board.width + xTo);
+        int piecePossibleMove;
+        piecePossibleMove = (pieceCol + row) * Board.width + (pieceRow + col);
+        if (piecePossibleMove == wantedMove) {
+            if (this.verifyMovePiece(board, piecePossibleMove, ocupied, jump)) {
+                movePiece(board, pieceIndex, piecePossibleMove);
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
+
+    private boolean verifyMovePiece(Board board, int piecePossibleMove, boolean hasToBeOcupied, boolean jump) {
+        Optional<Piece> tileToMovePiece = Optional.ofNullable(board.boardPieces.get(piecePossibleMove));
+        if ((tileToMovePiece.isPresent() && tileToMovePiece.get().color != this.color && jump)
+                || (tileToMovePiece.isEmpty() && !hasToBeOcupied)) {
+            return true;
+        } 
+        return false;
+    }
+
+    private void movePiece(Board board, int indexOfPiece, int indexOfTileToMove) {
+        board.boardPieces.set(indexOfTileToMove, this);
+        board.boardPieces.set(indexOfPiece, null);
+        int row = indexOfTileToMove/Board.width;
+        int col = indexOfTileToMove-(Board.width*row);
+        this.y = row * GamePanel.tileSize;
+        this.x = col * GamePanel.tileSize;
+    }
+
+    public CORDS getElectedCords(int xTo, int yTo) {
+        ArrayList<CORDS> xCords = new ArrayList<CORDS>();
+        ArrayList<CORDS> yCords = new ArrayList<CORDS>();
+        if (yTo == (this.y / GamePanel.tileSize)) {
+            yCords.add(CORDS.W);
+            yCords.add(CORDS.E);
+            yCords.add(CORDS.SELF);
+        } else if (yTo > (this.y / GamePanel.tileSize)) {
+            yCords.add(CORDS.SW);
+            yCords.add(CORDS.S);
+            yCords.add(CORDS.SE);
+        } else {
+            yCords.add(CORDS.N);
+            yCords.add(CORDS.NE);
+            yCords.add(CORDS.NW);
+        }
+        if (xTo == (this.x / GamePanel.tileSize)) {
+            xCords.add(CORDS.N);
+            xCords.add(CORDS.S);
+            xCords.add(CORDS.SELF);
+        } else if (xTo > (this.x / GamePanel.tileSize)) {
+            xCords.add(CORDS.NE);
+            xCords.add(CORDS.E);
+            xCords.add(CORDS.SE);
+        } else {
+            xCords.add(CORDS.W);
+            xCords.add(CORDS.SW);
+            xCords.add(CORDS.NW);
+        }
+        // System.out.println(xCords+"x=>"+xTo+":"+(this.x /
+        // GamePanel.tileSize_)+"\n"+yCords+"y=>"+yTo+":"+(this.y /
+        // GamePanel.tileSize_)+"\n");
+        // System.out.println(yCords.stream()
+        // .filter(xCords::contains)
+        // .collect(Collectors
+        // .toList())
+        // .get(0));
+        return yCords.stream()
+                .filter(xCords::contains)
+                .collect(Collectors
+                        .toList())
+                .get(0);
+    }
 
     public abstract boolean move(Board board, int xTo, int yTo);
 
@@ -76,51 +221,6 @@ public abstract class Piece {
 
         return img;
     }
-
-    public CORDS getElectedCords(int xTo, int yTo) {
-        ArrayList<CORDS> xCords = new ArrayList<>();
-        ArrayList<CORDS> yCords = new ArrayList<>();
-        if (yTo > (this.y / GamePanel.tileSize)) {
-            yCords.add(CORDS.A);
-            yCords.add(CORDS.B);
-        } else {
-            yCords.add(CORDS.C);
-            yCords.add(CORDS.D);
-        }
-        if (xTo > (this.y / GamePanel.tileSize)) {
-            xCords.add(CORDS.A);
-            xCords.add(CORDS.B);
-        } else {
-            xCords.add(CORDS.C);
-            xCords.add(CORDS.D);
-        }
-        return yCords.stream()
-                        .filter(xCords::contains)
-                        .collect(Collectors.toList())
-                        .get(0);
-    }
-
-    public boolean canMove(Board board, int pieceIndex, int possibleMove) {
-
-        Optional<Piece> tileToMove = Optional.ofNullable(board.boardPieces.get(possibleMove));
-            if ((tileToMove.isPresent() && tileToMove.get().color != this.color) || tileToMove.isEmpty()) {
-                movePiece(board, pieceIndex, possibleMove);
-                return true;
-            }   else {
-                return false;
-            }
-    }
-
-    private void movePiece(Board board, int indexOfPiece, int indexOfTileToMove) {
-        board.boardPieces.set(indexOfTileToMove, this);
-        board.boardPieces.set(indexOfPiece, null);
-        row = indexOfTileToMove/Board.width;
-        col = indexOfTileToMove-(Board.width*row);
-        this.y = row * GamePanel.tileSize;
-        this.x = col * GamePanel.tileSize;
-    }
-
-
 
     @Override
     public String toString() {
