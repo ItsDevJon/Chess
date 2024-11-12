@@ -57,7 +57,7 @@ public abstract class Piece {
         this.x = x;
         this.y = y;
         try {
-            this.img = getImg(type, color);
+            this.img = loadImg(type, color);
 
         } catch (Exception e) {
             img = null;
@@ -213,7 +213,7 @@ public abstract class Piece {
 
     public abstract boolean move(Board board, int xTo, int yTo);
 
-    private BufferedImage getImg(TYPE type, COLOR color) throws FileNotFoundException, IOException {
+    private BufferedImage loadImg(TYPE type, COLOR color) throws FileNotFoundException, IOException {
 
         BufferedImage img;
         
