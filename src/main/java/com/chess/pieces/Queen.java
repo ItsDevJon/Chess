@@ -11,18 +11,22 @@ public class Queen extends Piece{
 
     @Override
     public boolean move(Board board, int xTo, int yTo){
-        // TODO Auto-generated method stub
+
         boolean returnValue = false;
-        switch (getElectedCords(xTo, yTo)) {
+        CORDS cord = getElectedCords(xTo, yTo);
+        switch (cord) {
             case SW, SE, NE, NW:
-            returnValue=moveDiagonal(board, xTo, yTo);
+                returnValue = moveDiagonal(board, xTo, yTo);
                 break;
             case S, E, N, W:
-            returnValue=moveCross(board, xTo, yTo);
+                returnValue = moveCross(board, xTo, yTo);
                 break;
             default:
                 return returnValue;
         }
+
         return returnValue;
+
     }
+
 }
