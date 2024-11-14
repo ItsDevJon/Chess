@@ -65,6 +65,17 @@ public abstract class Piece {
         }
     }
     
+    public boolean canMove(Board board, int pieceIndex, int possibleMove) {
+        
+        Optional<Piece> tileToMove = Optional.ofNullable(board.boardPieces.get(possibleMove));
+        if ((tileToMove.isPresent() && tileToMove.get().color != this.color) || tileToMove.isEmpty()) {
+            movePiece(board, pieceIndex, possibleMove);
+            return true;
+        }   else {
+            return false;
+        }
+    }
+    
     public boolean moveDiagonal(Board board, int xTo, int yTo) {
         int xOrigin = (this.x / GamePanel.tileSize);
         int yOrigin = (this.y / GamePanel.tileSize);
@@ -209,5 +220,10 @@ public abstract class Piece {
         img = ImageIO.read(new FileInputStream(BASE.resolve(type + "_" + color + ".png").toString().toLowerCase()));
 
         return img;
+    }
+
+    @Override
+    public String toString() {
+        return "Piece [img=" + img + ", y=" + y + ", x=" + x + ", type=" + type + ", color=" + color + "]";
     }
 }
