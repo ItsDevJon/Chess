@@ -16,7 +16,7 @@ public class KnightTest {
     public void setUp() {
         board = new Board();
         board.chessInit();
-        whiteKnight = new Knight(Piece.COLOR.WHITE, 4 * GamePanel.tileSize, 3 * GamePanel.tileSize);
+        whiteKnight = new Knight(Piece.COLOR.WHITE, 4 * GamePanel.TILE_SIZE, 3 * GamePanel.TILE_SIZE);
     }
 
     @Test
