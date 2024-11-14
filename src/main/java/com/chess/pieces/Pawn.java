@@ -25,8 +25,7 @@ public class Pawn extends Piece{
 				default:
 					return returnValue;
 			}
-		}
-		if (this.color == COLOR.WHITE) {
+		} else {
 			switch (getElectedCords(xTo, yTo)) {
 				case SW:
 					returnValue = verifyAndMovePiece(board, xTo, yTo, -1, 1, true, true);
