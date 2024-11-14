@@ -10,22 +10,29 @@ import com.chess.Board;
 import com.chess.GamePanel;
 import com.chess.pieces.Piece.COLOR;
 
-public class RookTest {
+class RookTest {
     private Board board;
     private Rook rook;
+    private Rook badRook;
 
     @BeforeEach
     void setUp() {
         // Initialize the board and place the king at position (4,4)
         board = new Board();
         rook = new Rook(COLOR.WHITE, 4 * GamePanel.TILE_SIZE, 4 * GamePanel.TILE_SIZE);
-        board.getBoardPieces().set(36, rook); 
+        badRook = new Rook(null, 3 * GamePanel.TILE_SIZE, 3 * GamePanel.TILE_SIZE);
+        board.getBoardPieces().set(36, rook);
+        board.getBoardPieces().set(27, badRook);
+
     }
 
     @Test
     void testValidWhiteRookMove() {
         assertTrue(rook.move(board, 4, 5));
         assertTrue(rook.move(board, 5, 5));
+        assertTrue(rook.move(board, 4, 5));
+        assertTrue(rook.move(board, 4, 4));
+
     }
 
     @Test
