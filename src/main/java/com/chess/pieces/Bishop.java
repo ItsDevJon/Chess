@@ -18,12 +18,6 @@ public class Bishop extends Piece{
             case NW:
             returnValue=moveDiagonal(board, xTo, yTo);
                 break;
-            // case B:
-            // case D:
-            // case F:
-            // case H:
-            // returnValue=verifyAndMovePieceCruz(board, xTo, yTo);
-            //     break;
             default:
                 return returnValue;
         }

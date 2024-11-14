@@ -12,12 +12,6 @@ public class Rook extends Piece{
     public boolean move(Board board, int xTo, int yTo) {
         boolean returnValue = false;
         switch (getElectedCords(xTo, yTo)) {
-            // case A:
-            // case C:
-            // case E:
-            // case G:
-            // returnValue=verifyAndMovePieceDiagonal(board, xTo, yTo);
-                // break;
             case S:
             case E:
             case N:

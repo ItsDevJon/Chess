@@ -26,7 +26,6 @@ public class Board {
 
     public Board() {
         boardPieces = new ArrayList<>(TOTAL_PIECE);
-        //System.out.println("asi da");
         chessInit();
     }
 
@@ -79,7 +78,7 @@ public class Board {
     }
     public void drawPieces(Graphics2D g2){
         boardPieces.stream().filter(x -> x != null)
-                .forEach((n) ->g2.drawImage(n.img, n.x, n.y, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null));
+                .forEach(n ->g2.drawImage(n.img, n.x, n.y, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null));
         
     }
     public void drawBoard(Graphics2D g2){

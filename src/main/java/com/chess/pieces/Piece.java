@@ -196,14 +196,6 @@ public abstract class Piece {
             xCords.add(CORDS.SW);
             xCords.add(CORDS.NW);
         }
-        // System.out.println(xCords+"x=>"+xTo+":"+(this.x /
-        // GamePanel.tileSize_)+"\n"+yCords+"y=>"+yTo+":"+(this.y /
-        // GamePanel.tileSize_)+"\n");
-        // System.out.println(yCords.stream()
-        // .filter(xCords::contains)
-        // .collect(Collectors
-        // .toList())
-        // .get(0));
         return yCords.stream()
                 .filter(xCords::contains)
                 .collect(Collectors
