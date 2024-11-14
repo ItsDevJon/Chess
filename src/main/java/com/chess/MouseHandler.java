@@ -5,7 +5,7 @@ import java.awt.event.MouseListener;
 
 public class MouseHandler implements MouseListener {
 
-    private boolean fromToTurnstale = true;
+    public boolean fromToTurnstale = true;
     public int xFrom;
     public int yFrom;
     public int xTo;
