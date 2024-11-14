@@ -12,10 +12,6 @@ public class KnightTest {
     private Board board;
     private Knight whiteKnight;
 
-    public final int posX=4*GamePanel.tileSize; 
-    public final int posY=3*GamePanel.tileSize;
-    public final String piece = "Piece [img=knight_white.png, y=" + posX + ", x=" + posY + ", type=knight, color=WHITE]";
-
     @BeforeEach
     public void setUp() {
         board = new Board();
