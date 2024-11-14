@@ -20,7 +20,7 @@ public class GamePanel extends JPanel implements Runnable {
 	private final int SCREEN_WITH = TILE_SIZE * MAX_COL;
 	private final int SCREEN_HEIGHT = TILE_SIZE * MAX_ROW;
 
-	Thread gameThread;
+	private Thread gameThread;
 	private boolean gamaHasFinish;
 
 	public MouseHandler mHandler;
@@ -49,13 +49,13 @@ public class GamePanel extends JPanel implements Runnable {
 			gamaHasFinish = update();
 		}
 		gameThread.interrupt();
-		
+
 	}
 
 	private boolean update() {
 		return chess.game();
 	}
-
+	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Toolkit.getDefaultToolkit().sync();

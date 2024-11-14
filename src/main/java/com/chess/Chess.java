@@ -10,7 +10,6 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 import com.chess.pieces.Piece;
-import com.chess.pieces.King;
 import com.chess.pieces.Piece.COLOR;
 import com.chess.pieces.Piece.TYPE;
 
@@ -18,8 +17,8 @@ public class Chess {
     public static final int TOTAL_COL = 8;
     public static final int TOTAL_ROW = 8;
 
-    GamePanel gp;
-    Board board;
+    private GamePanel gp;
+    private Board board;
     private COLOR turn;
 
     public Chess(GamePanel gp, MouseHandler mHandler) {

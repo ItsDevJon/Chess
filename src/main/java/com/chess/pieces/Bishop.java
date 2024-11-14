@@ -6,7 +6,6 @@ public class Bishop extends Piece{
 
     public Bishop(COLOR color, int y, int x) {
         super(TYPE.BISHOP, color, y, x);
-        //TODO Auto-generated constructor stub
     }
 
     @Override
