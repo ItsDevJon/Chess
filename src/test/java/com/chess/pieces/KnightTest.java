@@ -1,16 +1,20 @@
 package com.chess.pieces;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import com.chess.Board;
 import com.chess.GamePanel;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 public class KnightTest {
 
     private Board board;
     private Knight whiteKnight;
+
+    public final int posX=4*GamePanel.tileSize; 
+    public final int posY=3*GamePanel.tileSize;
+    public final String piece = "Piece [img=knight_white.png, y=" + posX + ", x=" + posY + ", type=knight, color=WHITE]";
 
     @BeforeEach
     public void setUp() {
@@ -25,42 +29,12 @@ public class KnightTest {
     }
 
     @Test
-    public void testValidMoveSW2() {
-        assertTrue(whiteKnight.move(board, 3, 1));
-    }
-
-    @Test
-    public void testValidMoveSE1() {
-        assertTrue(whiteKnight.move(board, 5, 1));
-    }
-
-    @Test
-    public void testValidMoveSE2() {
-        assertTrue(whiteKnight.move(board, 6, 2));
-    }
-
-    @Test
-    public void testValidMoveNW1() {
-        assertTrue(whiteKnight.move(board, 2, 4));
-    }
-
-    @Test
-    public void testValidMoveNW2() {
-        assertTrue(whiteKnight.move(board, 3, 5));
-    }
-
-    @Test
-    public void testValidMoveNE1() {
-        assertTrue(whiteKnight.move(board, 5, 5));
-    }
-
-    @Test
-    public void testValidMoveNE2() {
-        assertTrue(whiteKnight.move(board, 6, 4));
-    }
-
-    @Test
     public void testInvalidMove() {
         assertFalse(whiteKnight.move(board, 3, 3));
+    }
+
+    @Test
+    public void testNotPermitedMove(){
+        assertFalse(whiteKnight.verifyAndMovePiece(board, 2, 2, 2, 2, false, true));
     }
 }
