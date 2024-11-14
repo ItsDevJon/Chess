@@ -65,17 +65,6 @@ public abstract class Piece {
         }
     }
     
-    public boolean canMove(Board board, int pieceIndex, int possibleMove) {
-        
-        Optional<Piece> tileToMove = Optional.ofNullable(board.getBoardPieces().get(possibleMove));
-        if ((tileToMove.isPresent() && tileToMove.get().color != this.color) || tileToMove.isEmpty()) {
-            movePiece(board, pieceIndex, possibleMove);
-            return true;
-        }   else {
-            return false;
-        }
-    }
-    
     public boolean moveDiagonal(Board board, int xTo, int yTo) {
         int xOrigin = (this.x / GamePanel.TILE_SIZE);
         int yOrigin = (this.y / GamePanel.TILE_SIZE);
