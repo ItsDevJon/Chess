@@ -42,6 +42,14 @@
     </dependencies>
     <build>
         <finalName>maven-unit-test</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.png</include> <!-- Adjust the pattern to match your image files -->
+                </includes>
+            </resource>
+        </resources>
         <plugins>
 
             <plugin>
