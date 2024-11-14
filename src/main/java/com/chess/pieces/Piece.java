@@ -51,7 +51,7 @@ public abstract class Piece {
     public TYPE type;
     public COLOR color;
 
-    public Piece(TYPE type, COLOR color, int y, int x) {
+    protected Piece(TYPE type, COLOR color, int y, int x) {
         this.type = type;
         this.color = color;
         this.x = x;

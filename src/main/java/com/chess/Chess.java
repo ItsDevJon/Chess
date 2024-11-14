@@ -55,10 +55,10 @@ public class Chess {
                 turn = turnSwitch(moved);
             }
             gp.mHandler.clicked = false;
-            System.out.println("TURN OF: "+turn);
             if(hasGameFinish()){
                 return true;
             }
+            System.out.println("TURN OF: "+turn);
         }
         return false;
     }
