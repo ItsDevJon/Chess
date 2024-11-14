@@ -16,9 +16,9 @@ import com.chess.pieces.Rook;
 
 public class Board {
 
-    public final static int TOTAL_ROW = 8;
-    public final static int TOTAL_COL = 8;
-    public final static int TOTAL_PIECE = TOTAL_COL * TOTAL_ROW;
+    public static final int TOTAL_ROW = 8;
+    public static final int TOTAL_COL = 8;
+    public static final int TOTAL_PIECE = TOTAL_COL * TOTAL_ROW;
 
     public static final int WIDTH = 8;
 
@@ -74,20 +74,23 @@ public class Board {
                     break;
             }
         }
-        //boardPieces.forEach(n -> System.out.println(n != null ? n.toString() : "null"));
+        // boardPieces.forEach(n -> System.out.println(n != null ? n.toString() :
+        // "null"));
     }
-    public void drawPieces(Graphics2D g2){
+
+    public void drawPieces(Graphics2D g2) {
         boardPieces.stream().filter(x -> x != null)
-                .forEach(n ->g2.drawImage(n.img, n.x, n.y, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null));
-        
+                .forEach(n -> g2.drawImage(n.img, n.x, n.y, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null));
+
     }
-    public void drawBoard(Graphics2D g2){
+
+    public void drawBoard(Graphics2D g2) {
         boolean turnTales = true;
         for (int y = 0; y < TOTAL_COL; y++) {
             for (int x = 0; x < TOTAL_ROW; x++) {
                 g2.setColor(turnTales ? Color.BLACK : Color.WHITE);
                 g2.fillRect(x * GamePanel.TILE_SIZE, y * GamePanel.TILE_SIZE, GamePanel.TILE_SIZE,
-                GamePanel.TILE_SIZE);
+                        GamePanel.TILE_SIZE);
                 turnTales = !turnTales;
             }
             turnTales = !turnTales;

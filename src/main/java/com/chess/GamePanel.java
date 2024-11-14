@@ -20,11 +20,11 @@ public class GamePanel extends JPanel implements Runnable {
 	private final int SCREEN_WITH = TILE_SIZE * MAX_COL;
 	private final int SCREEN_HEIGHT = TILE_SIZE * MAX_ROW;
 
-	private Thread gameThread;
+	private transient Thread gameThread;
 	private boolean gamaHasFinish;
 
-	public MouseHandler mHandler;
-	public Chess chess;
+	public transient MouseHandler mHandler;
+	public transient Chess chess;
 
 	public GamePanel() {
 		gamaHasFinish = false;
