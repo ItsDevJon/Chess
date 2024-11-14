@@ -213,9 +213,4 @@ public abstract class Piece {
 
         return img;
     }
-
-    @Override
-    public String toString() {
-        return "Piece [img=" + img + ", y=" + y + ", x=" + x + ", type=" + type + ", color=" + color + "]";
-    }
 }
