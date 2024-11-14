@@ -49,6 +49,7 @@ public class GamePanel extends JPanel implements Runnable {
 			gamaHasFinish = update();
 		}
 		gameThread.interrupt();
+		
 	}
 
 	private boolean update() {

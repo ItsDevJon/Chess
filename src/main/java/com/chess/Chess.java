@@ -5,10 +5,12 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
+import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 import com.chess.pieces.Piece;
+import com.chess.pieces.King;
 import com.chess.pieces.Piece.COLOR;
 import com.chess.pieces.Piece.TYPE;
 
@@ -33,9 +35,11 @@ public class Chess {
     }
 
     public boolean hasGameFinish() {
-        int kingCount = board.getBoardPieces().stream().filter(Objects::nonNull).collect(Collectors.toList()).stream()
-                .filter(n -> n.type == TYPE.KING).collect(Collectors.toList()).size();
-        return kingCount == 2 ? false : true;
+        List<Piece> kingLIst = board.getBoardPieces().stream().filter(Objects::nonNull).collect(Collectors.toList()).stream().filter(n -> n.type == TYPE.KING).collect(Collectors.toList());
+        if(kingLIst.size()==1){
+            System.out.println(kingLIst.get(0).color==COLOR.BLACK?"BLACK":"WITHE"+" HAS WON!!!\nClose the window to start over");
+        }
+        return kingLIst.size() == 2 ? false : true;
     }
 
     public boolean game() {
@@ -53,7 +57,9 @@ public class Chess {
             }
             gp.mHandler.clicked = false;
             System.out.println(turn);
-            if(hasGameFinish())return true;
+            if(hasGameFinish()){
+                return true;
+            }
         }
         return false;
     }
