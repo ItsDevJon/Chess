@@ -1,7 +1,6 @@
 package com.chess.pieces;
 
 import com.chess.Board;
-import com.chess.GamePanel;
 
 public class Pawn extends Piece{
     boolean firstMove = true;

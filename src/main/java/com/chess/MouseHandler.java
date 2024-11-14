@@ -6,12 +6,12 @@ import java.awt.event.MouseListener;
 public class MouseHandler implements MouseListener {
 
     private boolean fromToTurnstale = true;
-    int xFrom;
-    int yFrom;
-    int xTo;
-    int yTo;
-    boolean clicked = false;
-    boolean selected = false;
+    public int xFrom;
+    public int yFrom;
+    public int xTo;
+    public int yTo;
+    public boolean clicked = false;
+    public boolean selected = false;
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -30,23 +30,18 @@ public class MouseHandler implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        // TODO Auto-generated method stub
-        return;
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        // TODO Auto-generated method stub
-        return;    }
+    }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        // TODO Auto-generated method stub
-        return;    }
+    }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        // TODO Auto-generated method stub
-        return;    }
-    
+    }
+
 }

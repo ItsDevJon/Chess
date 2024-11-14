@@ -6,7 +6,6 @@ public class Queen extends Piece{
 
     public Queen(COLOR color, int y, int x) {
         super(TYPE.QUEEN, color, y, x);
-        //TODO Auto-generated constructor stub
     }
 
     @Override

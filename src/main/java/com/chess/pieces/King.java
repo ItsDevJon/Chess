@@ -6,12 +6,10 @@ public class King extends Piece{
 
     public King(COLOR color, int y, int x) {
         super(TYPE.KING, color, y, x);
-        //TODO Auto-generated constructor stub
     }
 
     @Override
     public boolean move(Board board, int xTo, int yTo) {
-        // TODO Auto-generated method stub
         boolean returnValue = false;
         switch (getElectedCords(xTo, yTo)) {
             case SW:

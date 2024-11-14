@@ -6,7 +6,6 @@ public class Knight extends Piece {
 
     public Knight(COLOR color, int y, int x) {
         super(TYPE.KNIGHT, color, y, x);
-        // TODO Auto-generated constructor stub
     }
 
     @Override

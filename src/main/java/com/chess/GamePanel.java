@@ -11,25 +11,27 @@ import javax.swing.JPanel;
 
 public class GamePanel extends JPanel implements Runnable {
 	
-	static final int originalSize = 16;
-	static final int scale = 6;
+	static final int ORIGINAL_SIZE = 16;
+	static final int SCALE = 6;
 	
-	public static final int tileSize = scale * originalSize;
-	public final int maxCol = 8;
-	public final int maxRow = 8;
-	final int screenWith = tileSize * maxCol;
-	final int screenHeight = tileSize * maxRow;
+	public static final int TILE_SIZE = SCALE * ORIGINAL_SIZE;
+	public final int MAX_COL = 8;
+	public final int MAX_ROW = 8;
+	private final int SCREEN_WITH = TILE_SIZE * MAX_COL;
+	private final int SCREEN_HEIGHT = TILE_SIZE * MAX_ROW;
 
-	Thread gameThread;
+	private transient Thread gameThread;
+	private boolean gamaHasFinish;
 
-	public MouseHandler mHandler;
-	public Chess chess;
+	public transient MouseHandler mHandler;
+	public transient Chess chess;
 
 	public GamePanel() {
+		gamaHasFinish = false;
 		mHandler = new MouseHandler();
 		this.addMouseListener(mHandler);
 		chess = new Chess(this, mHandler);
-		this.setPreferredSize(new Dimension(screenWith, screenHeight));
+		this.setPreferredSize(new Dimension(SCREEN_WITH, SCREEN_HEIGHT));
 		this.setBackground(Color.black);
 		this.setDoubleBuffered(true);
 		this.setFocusable(true);
@@ -42,16 +44,18 @@ public class GamePanel extends JPanel implements Runnable {
 
 	@Override
 	public void run() {
-		while (gameThread != null) {
+		while (gameThread != null && !gamaHasFinish) {
 			repaint();
-			update();
+			gamaHasFinish = update();
 		}
+		gameThread.interrupt();
+
 	}
 
-	private void update() {
-		chess.game();
+	private boolean update() {
+		return chess.game();
 	}
-
+	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Toolkit.getDefaultToolkit().sync();
