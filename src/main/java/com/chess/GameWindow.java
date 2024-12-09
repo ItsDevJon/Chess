@@ -1,5 +1,6 @@
 package com.chess;
 
+import com.chess.utils.ColorPalette;
 import com.chess.view.ChessBoardView;
 import lombok.Getter;
 
@@ -15,7 +16,7 @@ public class GameWindow extends JFrame {
     public GameWindow() {
 
         boardView = new ChessBoardView();
-        boardView.setBackground(Color.DARK_GRAY);
+        boardView.setBackground(ColorPalette.DARK_GREY);
 
         setTitle("Simple Chess Game");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

@@ -10,6 +10,7 @@
 
     <properties>
         <maven.compiler.source>22</maven.compiler.source>
+        <maven.compiler.target>22</maven.compiler.target>
         <sonar.sources>src/main/java</sonar.sources>
         <sonar.tests>src/test/java</sonar.tests>
         <sonar.projectKey>Chess</sonar.projectKey>
