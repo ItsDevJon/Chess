@@ -53,13 +53,14 @@ public class GameState {
      * Updates the state of the game (check, checkmate, etc.).
      */
     private void updateGameStatus() {
-        // Placeholder for logic to determine check, checkmate, or stalemate
-        isCheck = isKingInCheck(currentTurn.getOpposite());
-        isGameOver = isCheckmate(currentTurn.getOpposite()) || isStalemate();
 
+        // Logic to determine check
+        isCheck = isKingInCheck(currentTurn.getOpposite());
         if (isCheck) {
             LOGGER.info("Check!");
         }
+
+        // Logic to determine checkmate, or stalemate
 
     }
 
@@ -105,27 +106,6 @@ public class GameState {
 
         return false;
 
-    }
-
-    /**
-     * Determines if the specified color is in checkmate.
-     *
-     * @param color The color to check.
-     * @return true if the color is in checkmate; false otherwise.
-     */
-    private boolean isCheckmate(PieceColor color) {
-        // Placeholder: Logic to determine checkmate
-        return false;
-    }
-
-    /**
-     * Determines if the game is in a stalemate state.
-     *
-     * @return true if the game is a stalemate; false otherwise.
-     */
-    private boolean isStalemate() {
-        // Placeholder: Logic to determine stalemate
-        return false;
     }
 
 }
