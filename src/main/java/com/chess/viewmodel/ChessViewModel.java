@@ -26,7 +26,7 @@ public class ChessViewModel {
 
         initListeners();
 
-        view.updateBoard(gameState.getBoard().getPieces());
+        view.updateBoard(gameState.getBoard().getPieceGrid());
     }
 
     private void initListeners() {

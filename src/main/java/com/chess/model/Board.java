@@ -25,11 +25,11 @@ public class Board {
 
     private static final Logger LOGGER = Logger.getLogger(Board.class.getName());
 
-    private Grid<Piece> pieces;
+    private Grid<Piece> pieceGrid;
     private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
     public Board() {
-        pieces = new Grid<>(8, 8, null);
+        pieceGrid = new Grid<>(8, 8, null);
     }
 
     public void placePieces(){
@@ -67,20 +67,20 @@ public class Board {
     }
 
     public void placePiece(Position position, Piece piece) {
-        pieces.set(position, piece);
+        pieceGrid.set(position, piece);
     }
 
     public void movePiece(Position fromPos, Position toPos) {
 
-        Piece piece = pieces.get(fromPos);
+        Piece piece = pieceGrid.get(fromPos);
 
         if (piece != null && piece.isValidMove(fromPos, toPos, this)) {
 
             piece.setPosOnBoard(toPos);
-            pieces.set(toPos, piece);
-            pieces.set(fromPos, null);
+            pieceGrid.set(toPos, piece);
+            pieceGrid.set(fromPos, null);
 
-            pcs.firePropertyChange("board", null, pieces);
+            pcs.firePropertyChange("board", null, pieceGrid);
         }
         else {
             String message = fromPos + " -> " + toPos;
@@ -108,11 +108,11 @@ public class Board {
     }
 
     public Piece getPiece(Position position) {
-        return pieces.get(position);
+        return pieceGrid.get(position);
     }
 
     public Optional<Piece> findPiece(PieceType type, PieceColor color) {
-        return pieces.getElements().stream()
+        return pieceGrid.getElements().stream()
                 .flatMap(List::stream)
                 .filter(piece -> piece != null && piece.getPieceType() == type && piece.getPieceColor() == color)
                 .findFirst();

@@ -91,7 +91,7 @@ public class GameState {
 
         if (optionalKing.orElse(null) instanceof Piece king) {
 
-            return board.getPieces().getElements().stream().flatMap(List::stream).anyMatch(piece -> {
+            return board.getPieceGrid().getElements().stream().flatMap(List::stream).anyMatch(piece -> {
 
                 if (piece != null && piece.getPieceColor() != kingColor) {
                     return piece.isValidMove(piece.getPosOnBoard(), king.getPosOnBoard(), board);
