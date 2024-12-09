@@ -6,7 +6,6 @@ import lombok.Getter;
 
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
-import java.awt.Color;
 
 @Getter
 public class GameWindow extends JFrame {
