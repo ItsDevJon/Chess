@@ -1,20 +1,21 @@
 package com.chess;
 
-import javax.swing.JFrame;
+import com.chess.model.Board;
+import com.chess.model.GameState;
+import com.chess.viewmodel.ChessViewModel;
 
 public class Main {
-    public static void main(String[] args) {
-        JFrame window = new JFrame();
-		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setResizable(false);
-		window.setTitle("ChessGame");
-		//System.setProperty("sun.java2d.opengl", "true");
-		GamePanel gamePanel = new GamePanel();
-		window.add(gamePanel);
-		window.pack();
 
-		window.setLocationRelativeTo(null);
-		window.setVisible(true);
-		gamePanel.startGameThread();
-	}
+    public static void main(String[] args) {
+
+        Board board = new Board();
+        board.placePieces();
+
+        GameState gameState = new GameState(board);
+        GameWindow gameWindow = new GameWindow();
+
+        new ChessViewModel(gameState, gameWindow.getBoardView());
+
+    }
+
 }
